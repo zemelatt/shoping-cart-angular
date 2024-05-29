@@ -1,0 +1,21 @@
+
+
+<div class="py-5"> <div class="container-md">
+    
+    <div   class="row hidden-md-up gap-28">
+      <div *ngFor="let products of products" class="" style="width: 18rem;">
+
+        <img class="card-img-top" [src]=imgBaseUrl+products.img alt="{{products.title}}">
+
+        <div class="card-body">
+          <h5 class="card-title">{{products.price}}</h5>
+          <p class="card-text">{{products.title}}</p>
+          <a class="btn btn-primary" (click)="addTocart(products.id)">ADD</a>
+        </div>
+
+      </div>
+    </div><br/> <br/> <br/>
+  
+  </div>
+</div>
+ 

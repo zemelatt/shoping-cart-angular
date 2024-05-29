@@ -1,0 +1,40 @@
+
+<div class="container">
+    <form #catagoryForm="ngForm" (ngSubmit)="submitCatagory(catagoryForm)" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Catagory</label>
+          <input type="text"
+          name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Catagory title" value="{{oneCatagory}}" [(ngModel)]="catagoryData.title" >
+          <div *ngIf="catagoryForm.controls.title?.touched && catagoryForm.controls.title?.invalid" class="text-danger">
+            Catagory title is required.
+          </div>
+          <div  class="text-danger">
+          {{errMsg}}
+          </div>
+          <div  class="text-success">
+            {{succMsg}}
+         </div>
+          
+        </div>
+        <button type="submit" class="btn btn-primary">Add Catagory</button>
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let allCAtagory of allCAtagory">
+          <tr>
+            <th scope="row">1</th>
+            <td>{{allCAtagory.title}}</td>
+            <td (click)="editCatagory(allCAtagory.id)">edit</td>
+            <td (click)="deleteCatagory(allCAtagory.id)">delete</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>  
+  

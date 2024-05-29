@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div *ngIf="register; else login">
+    <h3 >Registration form</h3>
+  </div>
+  <ng-template #login><h3 >Login form</h3></ng-template>
+
+<form #userForm="ngForm" (ngSubmit)="submitForm(userForm)" enctype="multipart/form-data">
+  <div  *ngIf="register" class="form-group">
+    <label for="exampleInputEmail1">User name</label>
+    <input type="text" name="userName" class="form-control" id="exampleInputUserName" aria-describedby="username" placeholder="Enter email" [(ngModel)]="userDetails.userName" required>
+    <div *ngIf="userForm.controls.userName?.touched && userForm.controls?.userName?.invalid" class="text-danger">
+      User name is required.
+    </div>
+  </div>  
+  <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <div *ngIf="isEmailErr" class="text-danger">
+       {{emailErr}}
+      </div>
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userDetails.email" required>
+      <div *ngIf="userForm.controls.email?.touched && userForm.controls?.email?.invalid" class="text-danger">
+        Email is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" [(ngModel)]="userDetails.password" required>
+      <div *ngIf="userForm.controls.password?.touched && userForm.controls?.password?.invalid" class="text-danger">
+        Password is required.
+      </div>
+    </div>
+    <div *ngIf="register" class="form-group">
+      <label for="exampleInputPassword1">Confirm password</label>
+      <input type="password" name="confirmPassword" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password" [(ngModel)]="userDetails.confirmPassword" required>
+      <div *ngIf="userForm.controls.confirmPassword?.touched === userForm.controls?.password?.invalid" class="text-danger">
+        Confirming your password is required.
+      </div>
+    </div>
+    <div >
+      {{errMessage}}
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+    <p (click)="toRegister()"> Register here</p>
+  </form>
+</div>
+
+
