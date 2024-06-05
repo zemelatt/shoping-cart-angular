@@ -1,5 +1,9 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
+/src/uploads/*.jpg
+/src/uploads/*.png
+/src/uploads/*.webp
+
 # Compiled output
 /dist
 /tmp

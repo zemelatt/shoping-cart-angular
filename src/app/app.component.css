@@ -21,3 +21,9 @@
     color: #ffffff;
     text-shadow: 0 1px 0 #528ecc;
 }
+.cart{
+    padding-left: 4px;
+}
+.not-admin-nav{
+    background-color: rgb(20 184 166);
+}

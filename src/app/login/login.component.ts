@@ -1,16 +1,11 @@
-import { Component, Injectable, Injector, OnInit } from '@angular/core';
-import {
-  HttpClient,
-  withFetch,
-  provideHttpClient,
-  HttpHeaders,
-} from '@angular/common/http';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { AppServiceService } from '../app-service.service';
+import { auth } from '../store/counter.action';
 
 @Component({
   selector: 'app-login',
@@ -23,26 +18,23 @@ import { AppServiceService } from '../app-service.service';
   providedIn: 'root',
 })
 export class LoginComponent implements OnInit {
-  public userDetails = {
-    userName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
-  private tokenKey = 'auth_token';
-  public register = false;
-  public errMessage: string = '';
-  public isEmailErr: boolean = false;
-  public emailErr: string = '';
+  userDetails = { userName: '', email: '', password: '', confirmPassword: '' };
+  tokenKey = 'auth_token';
+  register = false;
+  errMessage: string = '';
+  isEmailErr: boolean = false;
+  emailErr: string = '';
+
   constructor(
     private router: Router,
-    private http: HttpClient,
-    private appService: AppServiceService
+    private appService: AppServiceService,
+    private store: Store<{ auth: { auth: any } }>
   ) {}
 
   toRegister() {
     this.register = !this.register;
   }
+
   async submitForm(userForm: NgForm) {
     const { userName, email, password, confirmPassword } = this.userDetails;
 
@@ -52,11 +44,14 @@ export class LoginComponent implements OnInit {
         this.errMessage = fromService.data.errMessage;
         return;
       }
-      console.log(fromService.data);
 
       localStorage.setItem(this.tokenKey, fromService.data.token);
       localStorage.setItem('login', fromService.data.role);
-      this.router.navigate(['/all-products']);
+      this.router.navigate(
+        fromService.data.role == 'admin' ? ['/add-catagory'] : ['/all-products']
+      );
+
+      this.store.dispatch(auth({ role: fromService.data.role }));
     }
 
     if (password == confirmPassword) {
@@ -70,14 +65,11 @@ export class LoginComponent implements OnInit {
       this.isEmailErr = true;
 
       if (addNewUserFromService.status == 201) {
-        this.errMessage;
         this.register = false;
         userForm.reset();
       }
     }
     this.errMessage = 'password inputs should be the same with confirm input';
   }
-  ngOnInit(): void {
-    console.log('log');
-  }
+  ngOnInit(): void {}
 }

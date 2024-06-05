@@ -1,10 +1,11 @@
 
-<div class="container">
-    <form #catagoryForm="ngForm" (ngSubmit)="submitCatagory(catagoryForm)" enctype="multipart/form-data">
+<div class="container w-full max-w-xs mt-4">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"  #catagoryForm="ngForm" (ngSubmit)="submitCatagory(catagoryForm)" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="exampleInputEmail1">Catagory</label>
+          
+          <label for="name text-sm font-bold mb-2" class="text-lg font-semibold" >Catagory</label>
           <input type="text"
-          name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Catagory title" value="{{oneCatagory}}" [(ngModel)]="catagoryData.title" >
+          name="title" class="form-control block text-gray-700 text-sm font-bold mb-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Catagory title" value="{{oneCatagory}}" [(ngModel)]="catagoryData.title" >
           <div *ngIf="catagoryForm.controls.title?.touched && catagoryForm.controls.title?.invalid" class="text-danger">
             Catagory title is required.
           </div>
@@ -16,25 +17,30 @@
          </div>
           
         </div>
-        <button type="submit" class="btn btn-primary">Add Catagory</button>
+        <button type="submit" class=" bg-teal-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Catagory</button>
       </form>
-      <table class="table">
-        <thead>
+      <table class="table bg-light">
+        <thead class="thead-dark ">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">edit</th>
-            <th scope="col">delete</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody *ngFor="let allCAtagory of allCAtagory">
+        <tbody *ngFor="let allCAtagory of allCAtagory" class="">
           <tr>
-            <th scope="row">1</th>
+            <th scope="row"></th>
             <td>{{allCAtagory.title}}</td>
-            <td (click)="editCatagory(allCAtagory.id)">edit</td>
-            <td (click)="deleteCatagory(allCAtagory.id)">delete</td>
+            <td (click)="editCatagory(allCAtagory.id)" class="text-teal-500"><span class="material-icons">
+              edit
+              </span></td>
+            <td (click)="deleteCatagory(allCAtagory.id)"><span class="material-icons">
+              delete
+              </span></td>
           </tr>
         </tbody>
       </table>
   </div>  
-  
+ 
+ 

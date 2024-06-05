@@ -1,12 +1,11 @@
-import { Component, OnInit, inject, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs';
 
 import { AppServiceService } from '../app-service.service';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { toCart } from '../store/counter.action';
+import { CommonFunService } from '../common-fun.service';
 
 @Component({
   selector: 'app-all-products',
@@ -23,21 +22,26 @@ export class AllProductsComponent {
   globalVariable$ = this.globalVariableSubject.asObservable();
   imgBaseUrl = '../../uploads/';
   products: any[] = [];
-  tocart: any;
-
-  constructor(private globalService: AppServiceService) {}
+  isItemAdded: boolean = false;
+  productId: any;
+  constructor(
+    private globalService: AppServiceService,
+    private store: Store<{ counter: { counter: any; auth: any } }>,
+    private commonFunctionService: CommonFunService
+  ) {}
 
   async addTocart(id: number) {
+    this.productId = id;
     const res: any = await this.globalService.getSelectedProduct(id);
     localStorage.setItem('inCart', JSON.stringify(res.data.data));
-    this.globalService.setGlobalVariable(res.data.numOfData);
+    this.store.dispatch(toCart({ value: res.data.numOfData }));
+    this.commonFunctionService.check(this.products);
   }
 
   async ngOnInit() {
     this.products = await this.globalService.getProducts();
+    this.commonFunctionService.check(this.products);
   }
 
-  ngOnDestroy() {
-    // Unsubscribe or do cleanup if needed
-  }
+  ngOnDestroy() {}
 }

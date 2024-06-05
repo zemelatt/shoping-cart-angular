@@ -1,21 +1,33 @@
 
 
-<div class="py-5"> <div class="container-md">
-    
-    <div   class="row hidden-md-up gap-28">
-      <div *ngFor="let products of products" class="" style="width: 18rem;">
-
-        <img class="card-img-top" [src]=imgBaseUrl+products.img alt="{{products.title}}">
-
-        <div class="card-body">
-          <h5 class="card-title">{{products.price}}</h5>
-          <p class="card-text">{{products.title}}</p>
-          <a class="btn btn-primary" (click)="addTocart(products.id)">ADD</a>
+<div class="py-5 mt:4 "> 
+  <div class="container col-sm ">
+    <div class="d-flex flex-wrap justify-content-center">
+      <div *ngFor="let product of products"
+        class="max-w-sm rounded overflow-hidden shadow-lg transform hover:scale-105 shadow-xl hover:bg-gray-150 custom-card">
+        <img class="w-full " [src]=imgBaseUrl+product.img alt="{{product.title}}">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{product.title}}</div>
+          <p class="text-gray-700 text-base hover:bg-gray-100">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis
+            eaque, exercitationem praesentium nihil.
+          </p>
         </div>
-
+        <div class="px-6 pt-4 pb-2 flex justify-between items-center relative">
+          <div>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ product.price }}$</span>
+            <span class="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Enjoy shopping</span>
+          </div>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer bg-teal-400 hover:bg-teal-700" (click)="addTocart(product.id)">
+            <span class="material-icons mr-2">add_shopping_cart</span>
+            <span *ngIf="product.isItemAdded; else removeAddCart"><span class="material-icons">done_outline</span></span>
+          </span>
+        </div>
+        
       </div>
-    </div><br/> <br/> <br/>
-  
+    </div>
+    
+        
   </div>
-</div>
+
  

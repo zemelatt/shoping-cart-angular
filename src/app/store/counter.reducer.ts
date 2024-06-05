@@ -1,7 +1,7 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 
-import { decrement, increment, reset } from './action';
-import { initialState } from './state';
+import { decrement, increment, reset, toCart, auth } from './counter.action';
+import { initialState } from './counter.state';
 
 const _counterReducer = createReducer(
   initialState,
@@ -13,8 +13,21 @@ const _counterReducer = createReducer(
   }),
   on(reset, (state): any => {
     return { ...state, counter: state.counter };
+  }),
+  on(toCart, (state, action): any => {
+    return {
+      ...state,
+      counter: action.value,
+    };
+  }),
+  on(auth, (state, action): any => {
+    return {
+      ...state,
+      auth: action.role,
+    };
   })
 );
+
 export function counterReducer(state: any, action: any) {
   return _counterReducer(state, action);
 }

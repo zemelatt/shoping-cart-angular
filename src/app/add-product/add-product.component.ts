@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppServiceService } from '../app-service.service';
-
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClient, withFetch, provideHttpClient } from '@angular/common/http';
+import { AppServiceService } from '../app-service.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,18 +14,15 @@ import { HttpClient, withFetch, provideHttpClient } from '@angular/common/http';
   providers: [],
 })
 export class AddProductComponent implements OnInit {
-  catagories: any;
-  products: any;
+  public catagories: any;
+  public products: any;
   imgUrl: any = '../../uploads/';
   public isEdit: boolean = false;
   public editAbleProductId: any = '';
   public selectProduct: any;
   public editProducts: any;
 
-  constructor(
-    private http: HttpClient,
-    private appService: AppServiceService
-  ) {}
+  constructor(private globalService: AppServiceService) {}
 
   public userDetails = {
     name: '',
@@ -37,17 +32,13 @@ export class AddProductComponent implements OnInit {
     myPhoto: '',
   };
   async allCatagories() {
-    this.catagories = await this.appService.getAllCatagory();
+    this.catagories = await this.globalService.getAllCatagory();
   }
   processFile(imageInput: any) {
     this.userDetails.myPhoto = imageInput.files[0];
   }
 
   submitForm(userForm: any): any {
-    if (userForm.valid) {
-      // console.log('Form data:', this.userDetails);
-    }
-
     const formData = new FormData();
     formData.append('name', this.userDetails.name);
     formData.append('description', this.userDetails.description);
@@ -55,23 +46,20 @@ export class AddProductComponent implements OnInit {
     formData.append('catagory', this.userDetails.catagory);
     formData.append('myPhoto', this.userDetails.myPhoto);
     if (this.isEdit) {
-      console.log(formData);
-
-      this.appService.updateProduct(formData, this.editAbleProductId);
-      this.loadData();
+      this.globalService.updateProduct(formData, this.editAbleProductId);
       userForm.reset();
+      this.loadData();
     } else {
       this.isEdit = false;
-      this.appService.newProduct(formData);
-
-      userForm.reset();
+      this.globalService.newProduct(formData);
       this.loadData();
+      userForm.reset();
     }
+    this.loadData();
   }
 
   async editProduct(id: number) {
-    const selectProduct = await this.appService.selectOneProduct(id);
-
+    const selectProduct = await this.globalService.selectOneProduct(id);
     this.userDetails.name = selectProduct.data[0].title;
     this.userDetails.description = selectProduct.data[0].description;
     this.userDetails.price = selectProduct.data[0].price;
@@ -81,17 +69,17 @@ export class AddProductComponent implements OnInit {
     this.editAbleProductId = selectProduct.data[0].id;
   }
   async deleteProduct(id: number) {
-    this.appService.deleteProduct(id);
+    this.globalService.deleteProduct(id);
     this.loadData();
   }
   async ngOnInit() {
     this.allCatagories();
-    this.products = await this.appService.getProducts();
+    this.products = await this.globalService.getProducts();
     this.loadData();
   }
   async loadData(): Promise<void> {
     try {
-      this.products = await this.appService.getProducts();
+      this.products = await this.globalService.getProducts();
     } catch (error) {
       console.error('Error loading data:', error);
     }

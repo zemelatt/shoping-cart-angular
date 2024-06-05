@@ -8,12 +8,15 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem('auth_token');
     const loginAuth = localStorage.getItem('login');
-    if (loginAuth == 'admin' && token) {
+
+    if (loginAuth && token) {
       return true;
     }
 
     return false;
-    // Check if the user is authenticated (e.g., by checking for a token)
-    // Return true if authenticated, false otherwise
+  }
+  getUserRoles(): string[] {
+    const roles = localStorage.getItem('login');
+    return roles ? roles.split(',') : [];
   }
 }
