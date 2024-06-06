@@ -5,17 +5,27 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppServiceService } from '../app-service.service';
-
+import { FormErrorsComponent } from '../components/form-errors/form-errors.component';
+import { TableComponent } from '../components/table/table.component';
+import { CommonFunService } from '../common-fun.service';
 @Component({
   selector: 'app-add-catagory',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule, HttpClientModule],
+  imports: [
+    RouterModule,
+    FormsModule,
+    CommonModule,
+    HttpClientModule,
+    FormErrorsComponent,
+    TableComponent,
+  ],
   templateUrl: './add-catagory.component.html',
   styleUrl: './add-catagory.component.css',
 })
 export class AddCatagoryComponent implements OnInit {
+  headerArray = ['#', 'title', 'Edit', 'Delete'];
   allCAtagory: any;
-  oneCatagory: any;
+
   editAbleCatagoryId: any = '';
   errMsg: string = '';
   succMsg: string = '';
@@ -25,7 +35,10 @@ export class AddCatagoryComponent implements OnInit {
 
   catagoryData = { title: '' };
 
-  constructor(private globalService: AppServiceService) {}
+  constructor(
+    private globalService: AppServiceService,
+    private commonFunc: CommonFunService
+  ) {}
   async ngOnInit() {
     this.allCAtagory = await this.globalService.getAllCatagory();
   }
@@ -56,9 +69,10 @@ export class AddCatagoryComponent implements OnInit {
 
   async editCatagory(id: any) {
     const oneCatagory = await this.globalService.selectOneCatagory(id);
-    this.oneCatagory = oneCatagory.data[0].title;
+    this.catagoryData.title = oneCatagory.data[0].title;
     this.isEdit = true;
     this.editAbleCatagoryId = oneCatagory.data[0].id;
+    this.loadData();
   }
 
   deleteCatagory(id: any) {

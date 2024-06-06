@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { log } from 'node:console';
+import { AppServiceService } from './app-service.service';
 interface Item {
   id: string;
   title: string;
@@ -12,7 +13,10 @@ interface Item {
 })
 export class CommonFunService {
   allCAtagory: any;
-  constructor() {}
+  isEdit: boolean;
+  oneCatagory: any;
+  editAbleCatagoryId: any;
+  constructor(private globalService: AppServiceService) {}
   calculateTotal(item: Item): number {
     const price = parseFloat(item.price);
     const qty = item.qty;

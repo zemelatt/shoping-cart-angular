@@ -4,19 +4,37 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AppServiceService } from '../app-service.service';
-
+import { FormErrorsComponent } from '../components/form-errors/form-errors.component';
+import { TableComponent } from '../components/table/table.component';
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule, HttpClientModule],
+  imports: [
+    RouterModule,
+    FormsModule,
+    CommonModule,
+    HttpClientModule,
+    FormErrorsComponent,
+    TableComponent,
+  ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css',
   providers: [],
 })
 export class AddProductComponent implements OnInit {
+  headerArray = [
+    '#',
+    'title',
+    'description',
+    'price',
+    'catagory',
+    'img',
+    'Edit',
+    'Delete',
+  ];
   catagories: any;
   products: any;
-  imgUrl: any = '../../uploads/';
+  imgUrl: any = '../../../uploads/';
   isEdit: boolean = false;
   editAbleProductId: any = '';
   selectProduct: any;

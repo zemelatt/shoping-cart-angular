@@ -1,0 +1,37 @@
+<!-- custom-table.component.html -->
+<table class="table bg-light">
+    <thead class="thead-dark">
+        <tr class="text-center">
+       
+        <th class="text-center" scope="col" *ngFor="let head of column">{{head}}</th>
+      
+      </tr>
+    </thead>
+    <tbody class="text-center">
+        
+        <tr  class="align-middle" *ngFor="let item of data; let i = index">
+            
+            <ng-container *ngFor="let head of column">
+          
+               <td  class="align-middle" *ngIf="head !== 'img' && head !== 'Edit' && head !== 'Delete'; else specialColumn">
+                {{item[head]}}
+               </td> 
+            <ng-template   #specialColumn>
+               <td  class="align-middle" *ngIf="head == 'img'"><img class="card-img-top" [src]=imgUrl+item.img alt="{{item.title}}" width="80px" height="80px"></td>
+               <td   class="align-middle" *ngIf="head === 'Edit'" (click)="editCatagory(item.id)" class="text-teal-500">
+                <button><span class="material-icons cursor-pointer text-teal-500 hover:text-blue-900">edit</span></button> 
+              </td>
+              <td class="align-middle" *ngIf="head === 'Delete'" (click)="deleteCatagory(item.id)">
+                
+                <span  class="material-icons  cursor-pointer text-teal-500 hover:text-red-500 ">delete</span>
+              </td>
+            </ng-template>
+            </ng-container>
+            
+        </tr>
+        
+       
+     
+    </tbody>
+  </table>
+  

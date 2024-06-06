@@ -4,12 +4,12 @@
         <div class="form-group">
           
           <label for="name text-sm font-bold mb-2" class="text-lg font-semibold" >Catagory</label>
+
           <input type="text"
-          name="title" class="form-control block text-gray-700 text-sm font-bold mb-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Catagory title" value="{{oneCatagory}}" [(ngModel)]="catagoryData.title" >
-          <div *ngIf="catagoryForm.controls.title?.touched && catagoryForm.controls.title?.invalid" class="text-danger">
-            Catagory title is required.
-          </div>
-          <div  class="text-danger">
+          name="title" class="form-control block text-gray-700 text-sm font-bold mb-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Catagory title"  [(ngModel)]="catagoryData.title" >
+          <app-form-errors *ngIf="catagoryForm.controls.title?.touched && catagoryForm.controls.title?.invalid" [msg]="' Catagory title is required'"/>
+          
+          <div  class="text-danger"> 
           {{errMsg}}
           </div>
           <div  class="text-success">
@@ -19,28 +19,9 @@
         </div>
         <button type="submit" class=" bg-teal-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Catagory</button>
       </form>
-      <table class="table bg-light">
-        <thead class="thead-dark ">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let allCAtagory of allCAtagory" class="">
-          <tr>
-            <th scope="row"></th>
-            <td>{{allCAtagory.title}}</td>
-            <td (click)="editCatagory(allCAtagory.id)" class="text-teal-500"><span class="material-icons">
-              edit
-              </span></td>
-            <td (click)="deleteCatagory(allCAtagory.id)"><span class="material-icons">
-              delete
-              </span></td>
-          </tr>
-        </tbody>
-      </table>
+      
+      <app-table [column]="headerArray" [data]="allCAtagory"  (edit)="editCatagory($event)" (delete)="deleteCatagory($event)"  />
+     
   </div>  
  
  

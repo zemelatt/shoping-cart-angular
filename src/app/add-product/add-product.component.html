@@ -3,29 +3,24 @@
    <div class="container mt-7">
  
     <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6">
-   
       <div class="form-group">
         <label for="name text-sm font-bold mb-2" class="text-lg font-semibold" >Name</label>
         <input type="text" placeholder="Product name" class="form-control font-semibold" id="name" name="name" value="{{userDetails.name}}" [(ngModel)]="userDetails.name" required>
-        <div *ngIf="userForm.controls.name?.touched && userForm.controls.name?.invalid" class="text-danger">
-          Name is required.
-        </div>
+        <app-form-errors *ngIf="userForm.controls.name?.touched && userForm.controls.name?.invalid" [msg]="'Name is required'" />  
       </div>
       
       <div class="form-group">
         <label for="description" class="text-lg font-semibold">Description</label>
         <textarea type="text" class="form-control font-semibold" id="description" name="description" value="" placeholder="Description" [(ngModel)]="userDetails.description" required description></textarea>
-        <div *ngIf="userForm.controls.description?.touched && userForm.controls.description?.invalid" class="text-danger">
-          Please enter a description about the product.
-        </div>
+        <app-form-errors *ngIf="userForm.controls.description?.touched && userForm.controls.description?.invalid" [msg]="'Please enter a description about the product'" />  
+      
       </div>
   
       <div class="form-group">
         <label for="price" class="text-lg font-semibold">Price</label>
         <input type="number" class="form-control font-semibold" id="price" name="price" value="" placeholder="Price" [(ngModel)]="userDetails.price" required>
-        <div *ngIf="userForm.controls.price?.touched && userForm.controls?.price?.invalid" class="text-danger">
-          Address is required.
-        </div>
+        <app-form-errors *ngIf="userForm.controls.price?.touched && userForm.controls?.price?.invalid" [msg]="'Address is required'" />
+        
       </div>
   
       <div class="form-group">
@@ -36,13 +31,8 @@
         </select>
       </div>
       <div class="custom-file">
-            
-       
         <label class="form-label text-lg font-semibold" for="photo">Select picture ot the product </label>
-       
-        <input #imageInput
-        
-         type="file" class="form-control" id="myPhoto" name="myPhoto"   (change)="processFile(imageInput)" />
+        <input #imageInput type="file" class="form-control" id="myPhoto" name="myPhoto"   (change)="processFile(imageInput)" />
        
       </div>
       <button [disabled]="!userForm.valid" type="submit" class=" bg-teal-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Submit</button>
@@ -50,41 +40,6 @@
    
   </div>
   <div class="container mt-10">
-    <table class="table bg-light">
-      <thead class="thead-dark">
-        <tr class="text-center">
-  
-          <th class="text-center" scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Catagory</th>
-          <th scope="col">picture</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let products of products" class="text-center">
-        <tr>
-  
-          <td class="align-middle">{{products.title}}</td>
-          <td class="align-middle">{{products.description}}</td>
-          <td class="align-middle"> {{products.price | currency}}</td>
-          <td class="align-middle">{{products.catagory}}</td>
-          <td class="align-middle"><img class="card-img-top" [src]=imgUrl+products.img alt="{{products.title}}" width="80px" height="80px">
-          </td>
-          <td class="align-middle"><button (click)="editProduct(products.id)">
-            <span class="material-icons cursor-pointer text-black hover:text-blue-500">
-            edit
-            </span></button></td>
-          <td class="align-middle" (click)="deleteProduct(products.id)"> 
-            
-          <button>
-            <span class="material-icons  cursor-pointer text-black hover:text-red-500 " >
-            delete
-            </span>
-          </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-table [column]="headerArray" [data]="products"  (edit)="editProduct($event)" (delete)="deleteProduct($event)"  />
+     
   </div>
