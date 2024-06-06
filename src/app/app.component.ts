@@ -1,18 +1,26 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { RouterLinkActive } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { AppServiceService } from './app-service.service';
+import { CommonModule } from '@angular/common';
+
 import { Store } from '@ngrx/store';
 import { decrement, increment, reset } from './store/counter.action';
-import { CommonModule } from '@angular/common';
+
 //pop
-import { AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { createPopper } from '@popperjs/core';
+
 import { CheckoutComponent } from './checkout/checkout.component';
 
 @Component({
@@ -36,19 +44,23 @@ import { CheckoutComponent } from './checkout/checkout.component';
 export class AppComponent implements OnInit {
   message: any;
   inCart: any;
-  title = 'shoping-Cart';
-  login: any = false;
   noOfProducts: any;
+  role: any;
+  counterDisplay: any;
+  roleDisplay: any;
+
+  login: any = false;
+  navAuth: boolean = false;
+  navAuthForUser: boolean = false;
+  dropdownPopoverShow: boolean = false;
+
+  title = 'shoping-Cart';
   data: string = '';
-  public navAuth: boolean = false;
-  public counterDisplay: any;
-  public roleDisplay: any;
-  public navAuthForUser: boolean = false;
-  dropdownPopoverShow = false;
+
   @ViewChild('btnDropdownRef', { static: false }) btnDropdownRef!: ElementRef;
   @ViewChild('popoverDropdownRef', { static: false })
   popoverDropdownRef!: ElementRef;
-  role: any;
+
   constructor(private store: Store<{ counter: { counter: any; auth: any } }>) {
     this.getToken();
   }

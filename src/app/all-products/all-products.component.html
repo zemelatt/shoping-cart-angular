@@ -15,7 +15,7 @@
         </div>
         <div class="px-6 pt-4 pb-2 flex justify-between items-center relative">
           <div>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ product.price }}$</span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ product.price |currency}}$</span>
             <span class="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Enjoy shopping</span>
           </div>
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer bg-teal-400 hover:bg-teal-700" (click)="addTocart(product.id)">

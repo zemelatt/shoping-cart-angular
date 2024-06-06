@@ -14,13 +14,13 @@ import { AppServiceService } from '../app-service.service';
   providers: [],
 })
 export class AddProductComponent implements OnInit {
-  public catagories: any;
-  public products: any;
+  catagories: any;
+  products: any;
   imgUrl: any = '../../uploads/';
-  public isEdit: boolean = false;
-  public editAbleProductId: any = '';
-  public selectProduct: any;
-  public editProducts: any;
+  isEdit: boolean = false;
+  editAbleProductId: any = '';
+  selectProduct: any;
+  editProducts: any;
 
   constructor(private globalService: AppServiceService) {}
 
@@ -31,9 +31,11 @@ export class AddProductComponent implements OnInit {
     catagory: '',
     myPhoto: '',
   };
+
   async allCatagories() {
     this.catagories = await this.globalService.getAllCatagory();
   }
+
   processFile(imageInput: any) {
     this.userDetails.myPhoto = imageInput.files[0];
   }
@@ -45,6 +47,7 @@ export class AddProductComponent implements OnInit {
     formData.append('price', this.userDetails.price);
     formData.append('catagory', this.userDetails.catagory);
     formData.append('myPhoto', this.userDetails.myPhoto);
+
     if (this.isEdit) {
       this.globalService.updateProduct(formData, this.editAbleProductId);
       userForm.reset();
@@ -68,15 +71,18 @@ export class AddProductComponent implements OnInit {
     this.isEdit = true;
     this.editAbleProductId = selectProduct.data[0].id;
   }
+
   async deleteProduct(id: number) {
     this.globalService.deleteProduct(id);
     this.loadData();
   }
+
   async ngOnInit() {
     this.allCatagories();
     this.products = await this.globalService.getProducts();
     this.loadData();
   }
+
   async loadData(): Promise<void> {
     try {
       this.products = await this.globalService.getProducts();

@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppServiceService } from '../app-service.service';
+
 import { CommonFunService } from '../common-fun.service';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-checkout',
@@ -17,10 +16,7 @@ export class CheckoutComponent implements OnInit {
   public reconstructedObject: any;
   public imgUrl: any = '../../uploads/';
   public overAllSum!: number;
-  constructor(
-    private globalService: AppServiceService,
-    private commonFunService: CommonFunService
-  ) {}
+  constructor(private commonFunService: CommonFunService) {}
 
   async addQty(id: any) {
     this.checkoutList = await this.commonFunService.getProductInLocal();
@@ -38,6 +34,7 @@ export class CheckoutComponent implements OnInit {
       this.checkoutList
     );
   }
+
   async minusQty(id: any) {
     this.checkoutList = await this.commonFunService.getProductInLocal();
     this.checkoutList = this.checkoutList.map(

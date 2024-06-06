@@ -45,7 +45,7 @@
          type="file" class="form-control" id="myPhoto" name="myPhoto"   (change)="processFile(imageInput)" />
        
       </div>
-      <button type="submit" class=" bg-teal-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Submit</button>
+      <button [disabled]="!userForm.valid" type="submit" class=" bg-teal-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8">Submit</button>
     </form>
    
   </div>
@@ -68,7 +68,7 @@
   
           <td class="align-middle">{{products.title}}</td>
           <td class="align-middle">{{products.description}}</td>
-          <td class="align-middle"> {{products.price}}</td>
+          <td class="align-middle"> {{products.price | currency}}</td>
           <td class="align-middle">{{products.catagory}}</td>
           <td class="align-middle"><img class="card-img-top" [src]=imgUrl+products.img alt="{{products.title}}" width="80px" height="80px">
           </td>

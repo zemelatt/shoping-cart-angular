@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { HttpClientModule } from '@angular/common/http';
+
 import { AppServiceService } from '../app-service.service';
 
 @Component({
@@ -14,14 +14,15 @@ import { AppServiceService } from '../app-service.service';
   styleUrl: './add-catagory.component.css',
 })
 export class AddCatagoryComponent implements OnInit {
-  public allCAtagory: any;
-  public oneCatagory: any;
-  public errMsg: string = '';
-  public succMsg: string = '';
-  public isSuccMsg: boolean = false;
-  public isErrMsg: boolean = false;
-  public isEdit: boolean = false;
-  public editAbleCatagoryId: any = '';
+  allCAtagory: any;
+  oneCatagory: any;
+  editAbleCatagoryId: any = '';
+  errMsg: string = '';
+  succMsg: string = '';
+  isSuccMsg: boolean = false;
+  isErrMsg: boolean = false;
+  isEdit: boolean = false;
+
   catagoryData = { title: '' };
 
   constructor(private globalService: AppServiceService) {}
@@ -52,6 +53,7 @@ export class AddCatagoryComponent implements OnInit {
     catagoryForm.reset();
     this.loadData();
   }
+
   async editCatagory(id: any) {
     const oneCatagory = await this.globalService.selectOneCatagory(id);
     this.oneCatagory = oneCatagory.data[0].title;
