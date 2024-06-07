@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { routes } from '../app.routes';
+import { routes } from '../../app.routes';
 import { Observable } from 'rxjs';
 import { AUTH_CONFIG } from './auth.config';
 import { url } from 'inspector';

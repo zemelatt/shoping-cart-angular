@@ -4,7 +4,7 @@ import { AddProductComponent } from './pages/add-product/add-product.component';
 import { AddCatagoryComponent } from './pages/add-catagory/add-catagory.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthGuard } from './protected-rout/protected-rout.component';
+import { AuthGuard } from './components/protected-rout/protected-rout.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './store/counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
