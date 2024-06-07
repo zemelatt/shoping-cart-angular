@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { CommonFunService } from '../common-fun.service';
-
+import { CommonFunService } from '../../common-fun.service';
+import { TableComponent } from '../../components/table/table.component';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TableComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
@@ -59,6 +59,7 @@ export class CheckoutComponent implements OnInit {
   async ngOnInit() {
     const getList = JSON.parse(localStorage.getItem('inCart') || '[]');
     this.checkoutList = await this.commonFunService.getProductInLocal();
+
     this.overAllSum = this.commonFunService.calculateTotalSum(
       this.checkoutList
     );

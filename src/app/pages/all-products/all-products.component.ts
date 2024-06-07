@@ -3,10 +3,10 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { toCart } from '../store/counter.action';
+import { toCart } from '../../store/counter.action';
 
-import { AppServiceService } from '../app-service.service';
-import { CommonFunService } from '../common-fun.service';
+import { AppServiceService } from '../../app-service.service';
+import { CommonFunService } from '../../common-fun.service';
 
 @Component({
   selector: 'app-all-products',

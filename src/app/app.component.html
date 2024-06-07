@@ -2,82 +2,10 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<nav [ngClass]="{'admin-nav': navAuth, 'not-admin-nav': !navAuth,  'flex': true, 'items-center': true, 'justify-between': true, 'flex-wrap': true, 'bg-black': true, 'p-0': true}">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <div *ngIf="navAuth; else user"><span>Hi Admin</span> </div>
-    <ng-template #user><span class="font-semibold text-xl tracking-tight">Shoping-Cart</span> </ng-template>
-  </div>
-  <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-autho">
-    <div class="font-serif text-xl lg:flex-grow ml-3">      
-      <a *ngIf="navAuth" href="/add-catagory" class=" block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200  hover:no-underline mr-4 fonts cursor-pointer">
-        Add Catagory
-      </a>
-      <a *ngIf="navAuth" href="/add-product" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-500  mr-4 hover:no-underline cursor-pointer" >
-        Add product
-      </a>
-      <a *ngIf="navAuthForUser" href="/all-products" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-black hover:no-underline cursor-pointer">
-        All products
-      </a>
-    </div>
-  
-    <a *ngIf="navAuthForUser" href="/checkout" class="pl-5 bg-non-500 w-40 h-10"  >
-      <sup class=" ml-10 font-bold static text-base text-blue-200 flex flex items-end ">{{inCart}}</sup>
-   <svg  xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="60px" fill="#e8eaed"><path d="m480-560-56-56 63-64H320v-80h167l-64-64 57-56 160 160-160 160ZM280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/></svg>
-     
-    </a>
-    <div class="flex flex-wrap">
-      <div class="w-full sm:w-6/12 md:w-4/12 px-4">
-        <div class="relative inline-flex align-middle w-full">
-          <button
-            class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 bg-blueGray-700 active:bg-blueGray-800"
-            type="button"
-            (click)="toggleDropdown($event)"
-            #btnDropdownRef
-          >
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360 280-560h400L480-360Z"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="z-50" style="min-width: 12rem" #popoverDropdownRef>
-      <div
-        class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-8"
-        style="min-width: 12rem"
-        [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
-      >
-        
-        <div
-          class="h-0 my-2 border border-solid border-t-0 border-blueGray-800 opacity-25"
-        ></div>
-        <a
-        href="/login"
-        class=" text-black no-underline hover:no-underline hover:text-red  border-non rounded-lg pl-5 "
-        (click)="logout()"
-        >
-     {{login ? 'Logout':'Login'}}
-     </a>
-      </div>
- 
-  </div>
- 
-  </div>
-</nav>
 
 
+<app-nav-bar></app-nav-bar>
 
-
-
-<!-- <button (click)="Onincrement()">inc</button>
-<button (click)="Ondecrement()">dec</button>
-<button (click)="OnRest()">res</button>
-<h1>heloooo {{counterDisplay}}</h1>
-<h2>{{roleDisplay}}</h2> -->
 
 
 <router-outlet></router-outlet>

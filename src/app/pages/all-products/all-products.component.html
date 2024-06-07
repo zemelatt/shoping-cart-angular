@@ -2,9 +2,9 @@
 
 <div class="py-5 mt:4 "> 
   <div class="container col-sm ">
-    <div class="d-flex flex-wrap justify-content-center">
+    <div class="d-flex flex-wrap justify-content-center justify-content-center">
       <div *ngFor="let product of products"
-        class="max-w-sm rounded overflow-hidden shadow-lg transform hover:scale-105 shadow-xl hover:bg-gray-150 custom-card">
+        class="max-w-sm rounded overflow-hidden shadow-lg transform hover:scale-105 shadow-xl hover:bg-gray-150 custom-card 	 mb-4 mr-4">
         <img class="w-full " [src]=imgBaseUrl+product.img alt="{{product.title}}">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{{product.title}}</div>
@@ -13,7 +13,7 @@
             eaque, exercitationem praesentium nihil.
           </p>
         </div>
-        <div class="px-6 pt-4 pb-2 flex justify-between items-center relative">
+        <div class="px-6  pb-2 flex justify-between items-center relative">
           <div>
             <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ product.price |currency}}$</span>
             <span class="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Enjoy shopping</span>

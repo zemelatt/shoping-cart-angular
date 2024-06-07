@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { AppServiceService } from '../app-service.service';
-import { FormErrorsComponent } from '../components/form-errors/form-errors.component';
-import { TableComponent } from '../components/table/table.component';
+import { AppServiceService } from '../../app-service.service';
+import { FormErrorsComponent } from '../../components/form-errors/form-errors.component';
+import { TableComponent } from '../../components/table/table.component';
 @Component({
   selector: 'app-add-product',
   standalone: true,

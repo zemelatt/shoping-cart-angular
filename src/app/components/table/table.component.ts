@@ -19,9 +19,7 @@ export class TableComponent {
   oneCatagory: any;
   isEdit: boolean;
   editAbleCatagoryId: any;
-  constructor(private globalService: AppServiceService) {
-    console.log(this.data);
-  }
+  constructor(private globalService: AppServiceService) {}
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
@@ -29,8 +27,9 @@ export class TableComponent {
     this.edit.emit(id);
   }
 
-  async deleteCatagory(id: any) {
+  deleteCatagory(id: any) {
     this.delete.emit(id);
+    this.loadData();
   }
   async loadData(): Promise<void> {
     try {

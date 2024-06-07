@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AppServiceService } from '../app-service.service';
-import { FormErrorsComponent } from '../components/form-errors/form-errors.component';
-import { TableComponent } from '../components/table/table.component';
-import { CommonFunService } from '../common-fun.service';
+import { AppServiceService } from '../../app-service.service';
+import { FormErrorsComponent } from '../../components/form-errors/form-errors.component';
+import { TableComponent } from '../../components/table/table.component';
+import { CommonFunService } from '../../common-fun.service';
 @Component({
   selector: 'app-add-catagory',
   standalone: true,
@@ -75,9 +75,9 @@ export class AddCatagoryComponent implements OnInit {
     this.loadData();
   }
 
-  deleteCatagory(id: any) {
+  async deleteCatagory(id: any) {
     this.globalService.deleteCatagory(id);
-    this.loadData();
+    await this.loadData();
   }
 
   async loadData(): Promise<void> {

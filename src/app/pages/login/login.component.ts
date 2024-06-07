@@ -4,8 +4,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 
-import { AppServiceService } from '../app-service.service';
-import { auth } from '../store/counter.action';
+import { AppServiceService } from '../../app-service.service';
+import { auth } from '../../store/counter.action';
 
 @Component({
   selector: 'app-login',

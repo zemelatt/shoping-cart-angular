@@ -13,10 +13,11 @@
             
             <ng-container *ngFor="let head of column">
           
-               <td  class="align-middle" *ngIf="head !== 'img' && head !== 'Edit' && head !== 'Delete'; else specialColumn">
+               <td  class="align-middle" *ngIf="head !== 'img' && head !== 'Edit' && head !== 'Delete' && head !== 'operations'&& head !== 'total'; else specialColumn">
                 {{item[head]}}
                </td> 
             <ng-template   #specialColumn>
+                
                <td  class="align-middle" *ngIf="head == 'img'"><img class="card-img-top" [src]=imgUrl+item.img alt="{{item.title}}" width="80px" height="80px"></td>
                <td   class="align-middle" *ngIf="head === 'Edit'" (click)="editCatagory(item.id)" class="text-teal-500">
                 <button><span class="material-icons cursor-pointer text-teal-500 hover:text-blue-900">edit</span></button> 
@@ -25,6 +26,8 @@
                 
                 <span  class="material-icons  cursor-pointer text-teal-500 hover:text-red-500 ">delete</span>
               </td>
+            
+        
             </ng-template>
             </ng-container>
             
